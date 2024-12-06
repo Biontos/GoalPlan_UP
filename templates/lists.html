@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Листы доски: {{ board.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Листы: {{ board.name }}</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            <label for="name">Название листа:</label>
+            {{ form.name() }}
+        </div>
+        <div>
+            <label for="description">Описание:</label>
+            {{ form.description() }}
+        </div>
+        <div>
+            <button type="submit">Добавить лист</button>
+        </div>
+    </form>
+    <ul>
+        {% for list_item in lists %}
+            <li>
+                <strong>{{ list_item.name }}</strong>: {{ list_item.description }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

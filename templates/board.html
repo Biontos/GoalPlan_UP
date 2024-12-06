@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доска: {{ board.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='board.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Доска: {{ board.name }}</h2>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for list in lists %}
+        <div class="col">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>{{ list.name }}</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for card in cards if card.list_id == list.id %}
+                        <li class="list-group-item">
+                            <a href="{{ url_for('card', card_id=card.id) }}">{{ card.title }}</a>
+                            <form action="{{ url_for('toggle_card_completed', card_id=card.id) }}" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-{{ 'success' if card.completed else 'secondary' }} btn-sm float-end">
+                                    {% if card.completed %}
+                                        Выполнено
+                                    {% else %}
+                                        Пометить как выполненную
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{{ url_for('create_card', list_id=list.id) }}" class="btn btn-primary mt-3">Добавить карточку</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('create_list', board_id=board.id) }}" class="btn btn-success mt-4">Добавить новый список</a>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-4">На главную</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

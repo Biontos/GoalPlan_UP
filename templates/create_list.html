@@ -1,0 +1,37 @@
+<!-- create_list.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание списка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Создание списка</h2>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                <label for="name">Название списка</label>
+                {{ form.name(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                <label for="position">Позиция</label>
+                {{ form.position(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Создать список</button>
+            </div>
+        </form>
+        <div class="bottom-buttons">
+        <a href="javascript:history.back()" class="btn-back">Назад</a>
+        </div>
+
+    </div>
+</body>
+</html>

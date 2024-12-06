@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать доску</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Создайте новую доску</h1>
+</header>
+
+<div class="content">
+    <form method="POST" action="{{ url_for('create_board') }}">
+        {{ form.hidden_tag() }}
+        <div>
+            <label for="name">Название доски:</label>
+            {{ form.name() }}
+        </div>
+        <button type="submit">Создать доску</button>
+    </form>
+</div>
+
+</body>
+</html>
